@@ -178,9 +178,9 @@ repositories {
 
 dependencies {
 
-    implementation fg.deobf(jarJar("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.1")) {
+    implementation fg.deobf(jarJar("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.3")) {
         transitive = false
-        jarJar.ranged(it, "[0.2.1,)")
+        jarJar.ranged(it, "[0.2.3,)")
     }
 
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")

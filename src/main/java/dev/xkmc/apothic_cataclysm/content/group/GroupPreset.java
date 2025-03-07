@@ -4,17 +4,15 @@ import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import dev.xkmc.apothic_cataclysm.init.ACModConfig;
 import dev.xkmc.apothic_cataclysm.init.ACTagGen;
+import dev.xkmc.apothic_cataclysm.init.ApothicCataclysm;
 import dev.xkmc.mob_weapon_api.example.vanilla.VanillaMobManager;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +58,7 @@ public class GroupPreset {
 		Item item = valid.get(e.getRandom().nextInt(valid.size()));
 		ItemStack stack = item.getDefaultInstance();
 		if (VanillaMobManager.attachGoal(e, stack)) {
+			e.addTag(ApothicCataclysm.MODID + "_applied");
 			e.setItemInHand(InteractionHand.MAIN_HAND, stack);
 			e.setDropChance(EquipmentSlot.MAINHAND, (float) (double) ACModConfig.COMMON.dropChanceOverride.get());
 		}

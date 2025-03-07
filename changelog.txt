@@ -1,2 +1,5 @@
+1.0.1
+- Fix the bug that mobs change weapon on rejoin
+
 1.0.0
 - Initial Release

@@ -4,6 +4,7 @@ import com.github.L_Ender.cataclysm.Cataclysm;
 import dev.xkmc.apothic_cataclysm.content.group.GroupPreset;
 import dev.xkmc.apothic_cataclysm.init.ACModConfig;
 import dev.xkmc.apothic_cataclysm.init.ApothicCataclysm;
+import dev.xkmc.mob_weapon_api.example.vanilla.VanillaMobManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +22,14 @@ public class MobSpawnEventHandler {
 		var e = event.getEntity();
 		if (!(e instanceof PathfinderMob mob)) return;
 		if (!mob.getPersistentData().getBoolean("apoth.boss")) return;
+		if (e.getTags().contains(ApothicCataclysm.MODID + "_checked")) {
+			if (e.getTags().contains(ApothicCataclysm.MODID + "_applied")) {
+				ItemStack stack = mob.getMainHandItem();
+				VanillaMobManager.attachGoal(mob, stack);
+			}
+			return;
+		}
+		e.addTag(ApothicCataclysm.MODID + "_checked");
 		ItemStack old = mob.getMainHandItem();
 		var chance = old.isEmpty() ? 1 : isApothWeapon(old) ?
 				ACModConfig.COMMON.chanceToReplaceBossWeapon.get() :
